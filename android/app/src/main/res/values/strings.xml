@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FBird</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">mNK0SjiIXmqDfdiJkVyeJk9SV8LQge6UqQCpx</string>
+</resources>

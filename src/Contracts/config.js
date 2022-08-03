@@ -1,0 +1,9 @@
+import { appConfig } from "../api/FAxios"
+
+export const FBT_ADDRESS = '0xe31886503E732241A5465B5D5DE916651AFA5395'
+export const FBB_ADDRESS = appConfig.fbbAddress
+export const GAME_ADDRESS = "0x575c24124358f90D7de5Db2BFA9eb391A65c8964"
+export const TOTAL_WALLET = "0x76FabBaf92B890DaB71A25Ae0a5D7220f131ef8F"
+export const WBNB_ADDRESS ='0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd'
+export const PAIR ='0x2a7a49df6ce979be00399a1e230b18874b71caf4'
+export const ROUTE = '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3'
