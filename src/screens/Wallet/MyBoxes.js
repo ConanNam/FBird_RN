@@ -47,6 +47,7 @@ export default function MyBoxes({ navigation }) {
                 for (let i = 0; i < nftBalance.toString(); i++) {
                     const tokenId = await fbbContract.tokenOfOwnerByIndex(owner, i);
                     const tokenUri = await fbbContract.tokenURI(tokenId);
+                    console.log("🚀 ~ file: MyBoxes.js ~ line 50 ~ loadListBox ~ tokenUri", tokenUri)
                     const meta = await axios.get(tokenUri);
                     let item = {
                         tokenId: tokenId.toString(),

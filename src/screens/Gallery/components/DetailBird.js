@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Dimensions,
@@ -13,9 +13,11 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
-import {marketActions} from '../../../redux/reducer/marketReducers';
-const {utils, ethers} = require('ethers');
+import { useDispatch } from 'react-redux';
+import { marketActions } from '../../../redux/reducer/marketReducers';
+const { utils, ethers } = require('ethers');
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import { goback } from '../../../navigator/rootNavigation';
 
 const DetailBird = props => {
   const item = props.route.params;
@@ -26,69 +28,79 @@ const DetailBird = props => {
     if (price > 0 && !item.onSale) {
       const priceBird = utils.parseUnits(price, 18).toString();
       dispatch(
-        marketActions.requestSaleBird({bird: item._id, price: priceBird}),
+        marketActions.requestSaleBird({ bird: item._id, price: priceBird }),
       );
     } else if (item.onSale) {
-      dispatch(marketActions.requestDeSaleBird({bird: item._id}));
+      dispatch(marketActions.requestDeSaleBird({ bird: item._id }));
     } else {
       Alert.alert('error enter price');
     }
   };
+
+  const handleBack = () => {
+    goback()
+  }
+
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.containerView}>
-        <View style={[styles.btn, {width: 200, backgroundColor: '#999e9b'}]}>
-          <Text style={styles.txtTypeDetail}>
-            {parseInt(item.price) > 0 ? 'BUY' : 'SALE'}
-          </Text>
-        </View>
-        <Text style={styles.txtName}>{item.name}</Text>
-        <Image
-          source={{uri: item.image}}
-          style={styles.photo}
-          resizeMode="contain"
-        />
-        <View>
-          <View style={styles.viewId}>
-            <View style={styles.viewItem}>
-              <Text style={styles.textId}>#</Text>
-            </View>
-            <Text style={styles.textIdBird}>{item.tokenId}</Text>
-          </View>
-        </View>
-        <View style={styles.body}>
-          <View style={styles.viewBody}>
-            <Text style={styles.txtBody}>Star</Text>
-            <Text>{item.star}</Text>
-          </View>
-          <View style={styles.viewBody}>
-            <Text style={styles.txtBody}>Energy</Text>
-            <Text>{item.energy}</Text>
-          </View>
-        </View>
-        <View style={styles.viewFooter}>
-          {!item.onSale ? (
-            <TextInput
-              keyboardType="numeric"
-              value={price}
-              onChangeText={text => setPrice(text)}
-              style={styles.input}
-              placeholder="Enter Price"
-            />
-          ) : null}
-          <TouchableOpacity style={styles.btn} onPress={() => onClickSale()}>
-            <Text style={styles.txtSale}>
-              {parseInt(item.price) > 0 ? 'Huỷ bán' : 'Bán'}
+      <TouchableOpacity hitSlop={36}
+      onPress={handleBack}>
+        <Ionicons name='ios-chevron-back-outline' color='black' size={36} style={{ marginHorizontal: 16, marginTop: 36 }} />
+      </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.containerView}>
+          <View style={[styles.btn, { width: 200, backgroundColor: '#999e9b' }]}>
+            <Text style={styles.txtTypeDetail}>
+              {parseInt(item.price) > 0 ? 'BUY' : 'SALE'}
             </Text>
-          </TouchableOpacity>
+          </View>
+          <Text style={styles.txtName}>{item.name}</Text>
+          <Image
+            source={{ uri: item.image }}
+            style={styles.photo}
+            resizeMode="contain"
+          />
+          <View>
+            <View style={styles.viewId}>
+              <View style={styles.viewItem}>
+                <Text style={styles.textId}>#</Text>
+              </View>
+              <Text style={styles.textIdBird}>{item.tokenId}</Text>
+            </View>
+          </View>
+          <View style={styles.body}>
+            <View style={styles.viewBody}>
+              <Text style={styles.txtBody}>Star</Text>
+              <Text>{item.star}</Text>
+            </View>
+            <View style={styles.viewBody}>
+              <Text style={styles.txtBody}>Energy</Text>
+              <Text>{item.energy}</Text>
+            </View>
+          </View>
+          <View style={styles.viewFooter}>
+            {!item.onSale ? (
+              <TextInput
+                keyboardType="numeric"
+                value={price}
+                onChangeText={text => setPrice(text)}
+                style={styles.input}
+                placeholder="Enter Price"
+              />
+            ) : null}
+            <TouchableOpacity style={styles.btn} onPress={() => onClickSale()}>
+              <Text style={styles.txtSale}>
+                {parseInt(item.price) > 0 ? 'Huỷ bán' : 'Bán'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {parseInt(item.price) === 0 && (
+            <Text style={styles.txtNote}>Lưu ý: Phí bán là 5%</Text>
+          )}
         </View>
-        {parseInt(item.price) === 0 && (
-          <Text style={styles.txtNote}>Lưu ý: Phí bán là 5%</Text>
-        )}
-      </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );

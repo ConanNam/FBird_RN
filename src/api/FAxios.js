@@ -4,21 +4,27 @@ import FInfo from 'react-native-sensitive-info';
 
 const appConfigs = {
     dev: {
-        baseURL: 'http://192.168.22.90:8001/v1/api',
-        socketURL: 'ws://192.168.22.90:8001',
+        baseURL: 'http://192.168.4.244:8001/v1/api',
+        socketURL: 'ws://192.168.4.244:8001',
         evn: 'staging',
-        fbbAddress: '0xe49E6C26C2cA992A4d686Ea77CEa8FF342151094'
+        fbbAddress: '0x37717a1B1154397f603a67c5A2ca6B5F4a4CF106'
     },
     prod: {
         baseURL: 'https://blockchain-fbird.dev.ftech.ai/v1/api',
         socketURL: 'wss://blockchain-fbird.dev.ftech.ai',
         evn: 'production',
-        fbbAddress: '0x60F605F97699E31da3021c9b03eec87b141C702f'
+        fbbAddress: '0x37717a1B1154397f603a67c5A2ca6B5F4a4CF106'
+    },
+    home:{
+        baseURL: 'http://192.168.0.109:8001/v1/api',
+        socketURL: 'ws://192.168.0.109:8001',
+        evn: 'staging',
+        fbbAddress: '0x37717a1B1154397f603a67c5A2ca6B5F4a4CF106'
     }
 }
 
 
-export const appConfig = appConfigs.prod
+export const appConfig = appConfigs.home
 
 const FAxios = axios.create({
     baseURL: appConfig.baseURL,

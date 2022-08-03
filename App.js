@@ -19,7 +19,9 @@ import store from './src/redux/store'
 import { Alert } from './src/components/Alert'
 import { authActions } from './src/redux/reducer/authReducer';
 import { Loading } from './src/components/Loading';
-
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 
 const AppRedux = () => {

@@ -24,6 +24,7 @@ export default function WalletOutGame({ navigation }) {
     const [visibleModal, setVisibleModal] = useState(false);
     const bnbBalanceReducer = useSelector(state => state.walletReducer.bnbBalance)
     const fbtBalanceReducer = useSelector(state => state.walletReducer.fbtBalance)
+    console.log("🚀 ~ file: WalletOutGame.js ~ line 27 ~ WalletOutGame ~ fbtBalanceReducer", fbtBalanceReducer)
     const nftBalanceReducer = useSelector(state => state.walletReducer.nftBalance)
     const [refreshing, setRefreshing] = useState(false);
     const onRefresh = React.useCallback(async () => {

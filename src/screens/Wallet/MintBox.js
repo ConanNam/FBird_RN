@@ -31,6 +31,8 @@ export default function MintBox({ navigation }) {
     const ownerAddress = account.address
     let allowance = await FBTContract.allowance(ownerAddress, FBB_ADDRESS)
     numberAllowance = ethers.utils.formatEther(allowance)
+    console.log("🚀 ~ file: MintBox.js ~ line 34 ~ checkAllowance ~ numberAllowance", numberAllowance)
+    
     if (allowance == 0.0)
       setBtnTitle('Approve')
     else
@@ -47,12 +49,12 @@ export default function MintBox({ navigation }) {
       showLoading('Xin chờ, yêu cầu đang được xử lý trên blockchain')
       let FBTContract = new ethers.Contract(FBT_ADDRESS, FBT.abi, account)
       if (allowance == 0.0) {
-        const amount = ethers.utils.parseUnits('10000000000', 'ether')
+        const amount = ethers.utils.parseUnits('100000000', 'ether')
         setBtnTitle('Approve...')
         let approve = await FBTContract.approve(FBB_ADDRESS, amount)
         if (approve){
           setBtnTitle('Buy')
-          setAllowance('10000000000')
+          setAllowance('100000000')
         }
       } else {
         let fbtAmount = fbtBalance * 1
@@ -64,7 +66,7 @@ export default function MintBox({ navigation }) {
           return
         }
         let contract = new ethers.Contract(FBB_ADDRESS, FBB.abi, account)
-        let transaction = await contract.mintBirdBox(boxType)
+        let transaction = await contract.mintBirdBox(boxType,{gasLimit:500000})
         let tx = await transaction.wait()
         showAlert(TYPE.SUCCESS, 'Thành công', `Mint box thành công, Transaction Hash: ${tx.transactionHash}`)
         dispatch(walletActions.getBalanceOnChain())

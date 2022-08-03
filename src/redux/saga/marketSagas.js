@@ -167,6 +167,8 @@ function* deSaleBird(action) {
     console.log('action123', action);
     try {
         const { data, error } = yield postDeSaleBird(action);
+        yield getMyBird()
+        yield getDataMyBird()
         if (!data.success) {
             showAlert(TYPE.ERROR, 'ERROR', data.message);
             return;
