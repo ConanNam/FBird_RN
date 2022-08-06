@@ -4,8 +4,8 @@ import FInfo from 'react-native-sensitive-info';
 
 const appConfigs = {
     dev: {
-        baseURL: 'http://192.168.4.244:8001/v1/api',
-        socketURL: 'ws://192.168.4.244:8001',
+        baseURL: 'http://38.242.148.177:8088/v1/api',
+        socketURL: 'ws://38.242.148.177:8088',
         evn: 'staging',
         fbbAddress: '0x37717a1B1154397f603a67c5A2ca6B5F4a4CF106'
     },
@@ -24,7 +24,7 @@ const appConfigs = {
 }
 
 
-export const appConfig = appConfigs.home
+export const appConfig = appConfigs.dev
 
 const FAxios = axios.create({
     baseURL: appConfig.baseURL,
