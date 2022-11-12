@@ -111,7 +111,7 @@ function* initProviderSaga(action) {
     try {
         const user = yield select(state => state.authReducers.user);
         const provider = new ethers.providers.JsonRpcProvider(
-            'https://data-seed-prebsc-1-s1.binance.org:8545/',
+            'https://bsctestapi.terminet.io/rpc',
         );
         let wallet, account;
         const mnemonic = yield SInfo.getItem(`mnemonic_${user._id}`, {
