@@ -166,7 +166,7 @@ const Marketplace = () => {
         <View style={styles.viewFooter}>
           <View style={styles.txtPrice}>
             <Text style={styles.txtFooter} multiline>
-              {utils.formatUnits(item.price, 18)} FTB
+              {utils.formatUnits(item.price, 18)} FBT
             </Text>
           </View>
           <TouchableOpacity
